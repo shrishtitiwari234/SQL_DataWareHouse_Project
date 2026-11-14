@@ -1,0 +1,98 @@
+/*
+=============================================================
+Create Database and Schemas
+=============================================================
+
+Script Purpose:
+    This script creates a new database named 'DataWarehouse'
+    after checking whether it already exists.
+
+    If the database does not exist, it creates it.
+    If it already exists, the existing database will remain
+    unchanged.
+
+    Additionally, the script creates three schemas within
+    the database to organise the Data Warehouse architecture:
+
+        1. Bronze - Stores raw data from source systems.
+        2. Silver - Stores cleaned and transformed data.
+        3. Gold   - Stores business-ready data for analytics.
+
+WARNING:
+    This script checks for the existence of the database and
+    schemas before creating them.
+
+    It does not drop or delete any existing database, schemas,
+    tables, or data.
+
+=============================================================
+*/
+
+
+-- =============================================
+-- Create Data Warehouse Database
+-- =============================================
+
+-- Switch to the system database
+USE master;
+GO
+
+-- Check if the database already exists before creating it
+IF NOT EXISTS (
+    SELECT 1
+    FROM sys.databases
+    WHERE name = 'DataWarehouse'
+)
+BEGIN
+    CREATE DATABASE DataWarehouse;
+END;
+GO
+
+
+-- =============================================
+-- Initialize Data Warehouse
+-- =============================================
+
+-- Switch to the Data Warehouse database
+USE DataWarehouse;
+GO
+
+
+-- =============================================
+-- Create Medallion Architecture Schemas
+-- =============================================
+
+-- Bronze Layer: Stores raw data from source systems
+IF NOT EXISTS (
+    SELECT 1
+    FROM sys.schemas
+    WHERE name = 'Bronze'
+)
+BEGIN
+    EXEC('CREATE SCHEMA Bronze');
+END;
+GO
+
+
+-- Silver Layer: Stores cleaned and transformed data
+IF NOT EXISTS (
+    SELECT 1
+    FROM sys.schemas
+    WHERE name = 'Silver'
+)
+BEGIN
+    EXEC('CREATE SCHEMA Silver');
+END;
+GO
+
+
+-- Gold Layer: Stores business-ready data for analytics
+IF NOT EXISTS (
+    SELECT 1
+    FROM sys.schemas
+    WHERE name = 'Gold'
+)
+BEGIN
+    EXEC('CREATE SCHEMA Gold');
+END;
+GO
