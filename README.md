@@ -28,3 +28,9 @@ This project focuses on designing and building a modern Data Warehouse using Mic
 Hi! I'm a student passionate about technology, data, and problem-solving. I'm continuously exploring SQL, Data Analytics, and Data Engineering through hands-on projects and practical learning.
 
 I believe in learning by building, experimenting, and improving one step at a time.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+Copyright (c) 2026 Shrishti Tiwari
